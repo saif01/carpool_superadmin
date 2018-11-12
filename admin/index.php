@@ -10,7 +10,7 @@ else{
 include('../db/config.php');
 
 //car used chart Mysql
-$query2="SELECT `car_name` ,COUNT(*) as number FROM `car_booking` GROUP BY `car_id` ";
+$query2="SELECT `car_name`,`car_number`, COUNT(*) as number FROM `car_booking` GROUP BY `car_id`";
 $result2 = mysqli_query($con, $query2);
 
         
@@ -220,7 +220,7 @@ $booking=mysqli_num_rows($sql4);
                     <?php  
                           while($row2 = mysqli_fetch_array($result2))  
                           {  
-                               echo "['".$row2["car_name"]."', ".$row2["number"]."],";  
+                               echo "['".$row2["car_name"].".".$row2["car_number"]."', ".$row2["number"]."],";  
                           }  
                           ?>
                 ]);
