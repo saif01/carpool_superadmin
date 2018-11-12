@@ -79,6 +79,7 @@
                 <li class="nav-item">
                   <a class="nav-link" href="car-add"><i class="menu-icon mdi mdi-pen text-warning"></i> Car Add</a>
                 </li>
+                
               </ul>
             </div>
           </li>
@@ -96,6 +97,12 @@
                 </li>
                 <li class="nav-item">
                   <a class="nav-link" href="driver-add"><i class="menu-icon mdi mdi-pen text-danger"></i> Driver Add</a>
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link" href="driver-report"><i class="menu-icon mdi mdi-chart-histogram text-danger"></i> Driver Report All</a>
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link" href="driver-report-dateWise"><i class="menu-icon mdi mdi-chart-bar text-danger"></i> Date Wise Report</a>
                 </li>
               </ul>
             </div>

@@ -8,30 +8,39 @@ header('location:index');
 else{ 
 
  include('include/header.php');
+ include('include/social_link_top.php'); 
  include('include/manu.php');
  include('db/config.php');
-  
+ ?>
+
+<!--== Page Title Area Start ==-->
+    <section id="page-title-area" class="section-padding overlay">
+        <div class="container">
+            <div class="row">
+                <!-- Page Title Start -->
+                <div class="col-lg-12">
+                    <div class="section-title  text-center">
+                        <h2>Car Dedails info.</h2>
+                        <span class="title-line"><i class="fa fa-car"></i></span>
+                       <!--  <p>C.P. Bangladesh Car List.. </p> -->
+                    </div>
+                </div>
+                <!-- Page Title End -->
+            </div>
+        </div>
+    </section>
+    <!--== Page Title Area End ==-->
+
+<?php 
 $driver_id=$_GET['driver_id'];
 $query=mysqli_query($con,"SELECT * FROM `car_driver` WHERE `driver_id`= $driver_id ");
 $value = $query->fetch_assoc();
 
-
 ?>
-
  <!--== About Page Content Start ==-->
     <section id="about-area" class="section-padding">
         <div class="container">
-            <div class="row">
-                <!-- Section Title Start -->
-                <div class="col-lg-12">
-                    <div class="section-title  text-center">
-                        <h2>About <?php echo $value['driver_name']; ?></h2>
-                        <span class="title-line"><i class="fa fa-car"></i></span>
-                        <p>This is C.P. BAngladesh Driver Profile</p>
-                    </div>
-                </div>
-                <!-- Section Title End -->
-            </div>
+            
 
             <div class="row">
                 <!-- About Content Start -->
@@ -44,6 +53,22 @@ $value = $query->fetch_assoc();
                             	<li> Contract Number : <?php echo $value['driver_phone']; ?> </li>
                             	<li> License Number : <?php echo $value['driver_license']; ?> </li>
                             	<li> Contract NID : <?php echo $value['driver_nid']; ?> </li>
+                                <li> Leave Status : 
+
+
+                                    <?php 
+                                    if ($value['leave_start']=='') {
+                                       echo "No Data Available";
+                                    }
+                                    else{
+
+                                        echo date("F j, Y", strtotime($value['leave_start'])) ." -- To -- ".date("F j, Y", strtotime($value['leave_end']));
+                                    }
+
+                                    ?> 
+
+
+                            </li>
                             	<li> </li>
                                 </ul>
                             </div>

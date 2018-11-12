@@ -6,6 +6,7 @@ if(strlen($_SESSION['adminName'])==0)
 header('location:login');
 }
 else{ 
+
 include('../db/config.php');
 ?>
     <!DOCTYPE html>
@@ -28,6 +29,8 @@ include('../db/config.php');
         <!-- endinject -->
         <link rel="shortcut icon" href="images/favicon.png" />
 
+
+
         <script language="javascript" type="text/javascript">
             var popUpWin = 0;
 
@@ -38,7 +41,6 @@ include('../db/config.php');
                 popUpWin = open(URLStr, 'popUpWin', 'toolbar=no,location=no,directories=no,status=no,menubar=no,scrollbars=yes,resizable=no,copyhistory=yes,width=' + 600 + ',height=' + 780 + ',left=' + left + ', top=' + top + ',screenX=' + left + ',screenY=' + top + '');
             }
         </script>
-
 
 
     </head>
@@ -62,88 +64,81 @@ include('../db/config.php');
                             <div class="col-lg-12 grid-margin stretch-card">
                                 <div class="card">
                                     <div class="card-body">
-                                        <!-- <h4 class="card-title">All Car Information </h4> -->
-                                        <button class="card-title btn btn-outline btn-block ">All Car Information</button>
-
-                                        <div class="table-responsive">
-                                            <table id="example" class="table table-striped table-bordered" style="width:100%">
+                                        <!-- <h4 class="card-title">All Booked Information </h4> -->
+                                        <button class="card-title btn btn-outline btn-block ">All Driver Leave Report</button>
+                                        <div class="table-responsive ">
+                                            <table id="example" class="table table-striped table-bordered table-responsive-md col-lg-12">
                                                 <thead>
                                                     <tr>
-                                                        <th>Car</th>
-                                                        <th>Name</th>
-                                                        <th>Number</th>
-                                                       <!--  <th>Type</th> -->
-                                                        <th>Capacity</th>
+                                                        <th>ID</th>
+                                                        <th>Driver</th>
+                                                        <th>Phone</th>
+                                                        <th>License</th>
+                                                        <th>NID</th>                                                        
+                                                       <th>Leave Start</th>
+                                                        <th>Leave Ends</th>
                                                         <th>Status</th>
-                                                        <th>Actions</th>
-                                                        
+                                                        <th>Reg. Date</th>
+
+
                                                     </tr>
                                                 </thead>
                                                 <tbody>
                                                     <?php 
-	$query=mysqli_query($con," SELECT * FROM `tbl_car`");
+    $query=mysqli_query($con,"SELECT * FROM `driver_leave`");
+
     while($row=mysqli_fetch_array($query))
     {
 
 ?>
                                                     <tr>
 
-                                                        <td><img src="p_img/carImg/<?php echo($row['car_img1']);?>" class="img-responsive" alt="Car Img" height="42" width="70" /></td>
-                                                        <td class="center">
-                                                            <?php echo htmlentities($row['car_name']) ; ?>
-                                                        </td>
-                                                        <td class="center">
-                                                            <?php echo htmlentities($row['car_namePlate']); ?>
-                                                        </td>
-                                                        
-                                                        <td class="center">
-                                                            <?php echo htmlentities($row['car_capacity']); ?>
-                                                        </td>
                                                         <td>
-                                                            
-                                                            <?php
-                                         if($row['temp_car']==1)
-                                         {?>
-                                            <a href="car-status-temp.php?h_car_id=<?php echo htmlentities($row['car_id']);?>" onclick="return confirm('Are you sure you want to make this ** Normal Car **?');" title="Normal"> <button class="btn btn-info">Temporary</button></a>
+                                                            <?php echo htmlentities($row['driver_leave_id']); ?> </td>
 
-                                            
-                                        <?php } else {?>
+                                                        <td>
+                                             <?php
+                  $driver_id=$row['driver_id'];
+                  $sql=mysqli_query($con,"SELECT * FROM `car_driver` WHERE `driver_id`='$driver_id' ");
+                  $row2=$sql->fetch_assoc();
 
-                                            <a href="car-status-temp.php?s_car_id=<?php echo htmlentities($row['car_id']);?>" onclick="return confirm('Are you sure you want to Make this ** Temporary Car **?');" title="Temporary"> <button class="btn btn-success">Nornal</button> </a> 
-                                            <?php } ?>
 
+                  ?>
+                <a href="javascript:void(0);" onClick="popUpWindow('driver-profile.php?driver_id=<?php echo $driver_id;?>');" title="View Driver Info.">
+
+                    <?php echo htmlentities($row2['driver_name']); ?> </a>
+
+
+                                                        </td>
+
+                                        <td><?php echo htmlentities($row2['driver_phone']); ?></td>
+                                        <td><?php echo htmlentities($row2['driver_license']);?> </td>
+                                         <td><?php echo htmlentities($row2['driver_nid']); ?></td>
+                                          
+                                        
+                                                        <td>
+                                     <?php echo date("M j, Y", strtotime($row['driver_leave_start'])); ?>
+                                                        </td>
+
+                                                        <td class="center">
+                                        <?php echo date("M j, Y", strtotime($row['driver_leave_end'])); ?>
                                                         </td>
 
 
                                                         <td class="center">
                                                             <?php
-                                         if($row['show_status']==1)
-                                         {?>
-                                            <a href="car-status.php?h_car_id=<?php echo htmlentities($row['car_id']);?>" onclick="return confirm('Are you sure you want to Hide this ** Car **?');" title="Hide"> <i class="mdi mdi-eye text-success icon-lg"></i></a>
-
-                                            
-                                        <?php } else {?>
-
-                                            <a href="car-status.php?s_car_id=<?php echo htmlentities($row['car_id']);?>" onclick="return confirm('Are you sure you want to Show this ** Car **?');" title="Show"> <i class="mdi mdi-eye-off text-danger icon-lg"></i></a> 
-                                            <?php } ?>
-                                          
-
-                <!-- </td>
-                <td class="center"> -->
-                  
-                  <a href="javascript:void(0);" onClick="popUpWindow('car-profile.php?car_id=<?php echo htmlentities($row['car_id']);?>');" title="View"
-                    >
-                    <i class="mdi  mdi-yeast text-info icon-lg"></i>  
-                  </a>
-
-                  <a href="car-edit?car_id=<?php echo htmlentities($row['car_id']);?>" title="Edit"
-                    >
-                    <i class="mdi mdi-pencil-box-outline text-warning icon-lg"></i>  
-                  </a>
-
-                <a href="car-delete.php?car_id=<?php echo $row['car_id']?>" onClick="return confirm('Are you sure you want to delete?')" title="Delete"> <i class="mdi mdi-close-box-outline text-danger icon-lg"></i></a>
-                                                                </a>
+                                                            if ($row['leave_status']=='1') {
+                                                                echo "Ok";
+                                                            }
+                                                            else{
+                                                                echo "Canceled";
+                                                            }?>
+                                                             
                                                         </td>
+
+                                                        <td><?php echo date("M j, Y", strtotime($row['Leave_reg'])); ?></td>
+
+                                                        
                                                     </tr>
                                                     <?php } ?>
 
@@ -153,7 +148,7 @@ include('../db/config.php');
                                     </div>
                                 </div>
                             </div>
- 
+
 
 
                         </div>
@@ -183,8 +178,7 @@ include('../db/config.php');
         <!-- Custom js for this page-->
         <!-- End custom js for this page-->
         <!-- <script src="https://code.jquery.com/jquery-3.3.1.js"></script> -->
-        <script src="
-https://cdn.datatables.net/1.10.19/js/jquery.dataTables.min.js"></script>
+        <script src="https://cdn.datatables.net/1.10.19/js/jquery.dataTables.min.js"></script>
         <script src="https://cdn.datatables.net/1.10.19/js/dataTables.bootstrap4.min.js"></script>
         <script src="https://cdn.datatables.net/buttons/1.5.2/js/dataTables.buttons.min.js"></script>
         <script src="https://cdn.datatables.net/buttons/1.5.2/js/buttons.bootstrap4.min.js"></script>
@@ -196,18 +190,19 @@ https://cdn.datatables.net/1.10.19/js/jquery.dataTables.min.js"></script>
         <script src="https://cdn.datatables.net/buttons/1.5.2/js/buttons.colVis.min.js"></script>
 
 
+
+
         <script type="text/javascript">
             $(document).ready(function() {
                 var table = $('#example').DataTable({
-                    // lengthChange: false,
-                    // buttons: [ 'copy', 'excel', 'pdf', 'colvis' ]
+                    lengthChange: false,
+                    buttons: [ 'excel', 'pdf', 'colvis' ]
                 });
 
-                // table.buttons().container()
-                //     .appendTo( '#example_wrapper .col-md-6:eq(0)' );
+                table.buttons().container()
+                    .appendTo( '#example_wrapper .col-md-6:eq(0)' );
             });
         </script>
-
 
     </body>
 

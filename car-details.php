@@ -8,9 +8,29 @@ header('location:index');
 else{  ?>
 
 
-<?php include('include/header.php');?>
-    <?php include('include/manu.php');?>
-    <?php include('db/config.php');?>
+<?php include('include/header.php');
+     include('include/social_link_top.php'); 
+     include('include/manu.php');
+     include('db/config.php');?>
+
+<!--== Page Title Area Start ==-->
+    <section id="page-title-area" class="section-padding overlay">
+        <div class="container">
+            <div class="row">
+                <!-- Page Title Start -->
+                <div class="col-lg-12">
+                    <div class="section-title  text-center">
+                        <h2>Car Dedails info.</h2>
+                        <span class="title-line"><i class="fa fa-car"></i></span>
+                       <!--  <p>C.P. Bangladesh Car List.. </p> -->
+                    </div>
+                </div>
+                <!-- Page Title End -->
+            </div>
+        </div>
+    </section>
+    <!--== Page Title Area End ==-->
+
 
 <?php 
 

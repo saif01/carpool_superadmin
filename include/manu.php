@@ -69,11 +69,11 @@
                                  
 
                                   <li><a href="car-list3"> Car List </a>
-                                    <!-- <ul>
-                                        <li><a href="car-list">Car List</a></li>
-                                        <li><a href="car-list2">Car List 2</a></li>
-                                        <li><a href="car-list3">Car List 3</a></li>
-                                    </ul> -->
+                                    <ul>
+                                        <li><a href="car-list3">Regular Car</a></li>
+                                        <li><a href="car-list-temp">Temporary Car</a></li>
+                                        
+                                    </ul>
                                 </li>
 
                                  <!-- <li><a href="about.html">About</a></li> -->

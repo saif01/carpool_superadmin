@@ -18,6 +18,7 @@ $car_capacity=$_POST['car_capacity'];
 $car_gearbox=$_POST['car_gearbox'];
 $car_door=$_POST['car_door'];
 $car_gps=$_POST['car_gps'];
+$temp_car=0;
 
 $car_aircondition=$_POST['car_aircondition'];
 $car_power_doorLock=$_POST['car_power_doorLock'];
@@ -34,7 +35,7 @@ move_uploaded_file($_FILES["imgB"]["tmp_name"],"p_img/carImg/".$_FILES["imgB"]["
 move_uploaded_file($_FILES["imgC"]["tmp_name"],"p_img/carImg/".$_FILES["imgC"]["name"]);
 
 
-$query=mysqli_query($con," INSERT INTO `tbl_car`(`car_name`, `car_namePlate`, `car_type`, `car_capacity`, `car_img1`, `car_img2`, `car_img3`, `car_door`, `car_gearbox`, `car_gps`, `car_aircobdition`, `car_power_doorLock`, `car_cdPlayer`, `car_remarks`) VALUES ('$car_name','$car_namePlate','$car_type','$car_capacity','$imgA','$imgB','$imgC','$car_door','$car_gearbox','$car_gps','$car_aircondition','$car_power_doorLock','$car_cd_player','$remarks')");
+$query=mysqli_query($con,"INSERT INTO `tbl_car`(`car_name`, `car_namePlate`, `temp_car`, `car_type`, `car_capacity`, `car_img1`, `car_img2`, `car_img3`, `car_door`, `car_gearbox`, `car_gps`, `car_aircobdition`, `car_power_doorLock`, `car_cdPlayer`, `car_remarks`) VALUES ('$car_name','$car_namePlate','$temp_car','$car_type','$car_capacity','$imgA','$imgB','$imgC','$car_door','$car_gearbox','$car_gps','$car_aircondition','$car_power_doorLock','$car_cd_player','$remarks')");
 
 
 ?>

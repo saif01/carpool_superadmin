@@ -69,12 +69,14 @@ include('../db/config.php');
                                                 <thead>
                                                     <tr>
                                                         <tr>
-                                                            <th>Image</th>
-                                                            <th>Name</th>
-                                                            <th>Car Img</th>
-                                                            <th>Name&number</th>
+                                                            <th>Driver</th>                 
+                                                            <th>Car</th>
                                                             <th>Phone</th>
+                                                            
                                                             <th>Actions</th>
+                                                            <th>Actions</th>
+                                                            <th>Leave Start</th>
+                                                            <th>Leave End</th>
 
 
 
@@ -82,7 +84,7 @@ include('../db/config.php');
                                                 </thead>
                                                 <tbody>
                                                     <?php 
-		$query=mysqli_query($con," SELECT * FROM `car_driver` ORDER BY `driver_id`");
+        $query=mysqli_query($con," SELECT * FROM `car_driver` ORDER BY `driver_id`");
     while($row=mysqli_fetch_array($query))
     {
 
@@ -91,14 +93,14 @@ include('../db/config.php');
 
                                                         <td>
                                                             <a href="javascript:void(0);" onClick="popUpWindow('driver-profile.php?driver_id=<?php echo htmlentities($row['driver_id']);?>');" title="View Driver Info.">
-                  <img src="p_img/driverimg/<?php echo($row['driver_img']);?>" class="img-responsive" alt="Image" height="42" width="42"/>  </td> </a>
+                  <img src="p_img/driverimg/<?php echo($row['driver_img']);?>" class="img-responsive" alt="Image" height="42" width="42"/>  
 
-                                                            <td>
+<?php echo htmlentities($row['driver_name']) ; ?>
 
-                                                                <a href="javascript:void(0);" onClick="popUpWindow('driver-profile.php?driver_id=<?php echo htmlentities($row['driver_id']);?>');" title="View Driver Info.">
-                                                                    <?php echo htmlentities($row['driver_name']) ; ?>
-                                                            </td>
-                                                            </a>
+
+              </td> </a>
+
+                                                            
                                                             <td>
                                                                 <?php 
                 $car_id = $row['car_id'];
@@ -107,16 +109,13 @@ include('../db/config.php');
 
                 ?>
                     <a href="javascript:void(0);" onClick="popUpWindow('car-profile.php?car_id=<?php echo htmlentities($row['car_id']);?>');" title="View Car Info.">
-                 <img src="p_img/carImg/<?php echo($row2['car_img1']);?>" class="img-responsive" alt="Not Assign" height="42" width="70"/> </a>
+                 <img src="p_img/carImg/<?php echo($row2['car_img1']);?>" class="img-responsive" alt="Not Assign" height="42" width="70"/>
+                <?php echo htmlentities($row2['car_name'].'--'.$row2['car_namePlate']); ?>
+
+                  </a>
 
                                                             </td>
-                                                            <td>
-
-                                                                 <a href="javascript:void(0);" onClick="popUpWindow('car-profile.php?car_id=<?php echo htmlentities($row['car_id']);?>');" title="View Car Info.">
-
-                                                                    <?php echo htmlentities($row2['car_name'].'--'.$row2['car_namePlate']); ?>
-                                                            </td>
-                                                            </a>
+                                                            
 
 
 
@@ -124,10 +123,16 @@ include('../db/config.php');
                                                                 <?php echo htmlentities($row['driver_phone']); ?>
                                                             </td>
 
+                                                           
 
                                                             <td>
-                                                                <?php
-                                         if($row['driver_status']==1)
+                                            <a href="javascript:void(0);" onClick="popUpWindow('driver-leave.php?driver_id=<?php echo htmlentities($row['driver_id']);?>');" title="Hide"> <button class="btn btn-info">Leave</button></a>  
+
+
+                                                            </td>
+                                                            <td>
+                                                  <?php              
+                                    if($row['driver_status']==1)
                                          {?>
                                     <a href="driver-status.php?h_user_id=<?php echo htmlentities($row['driver_id']);?>" onclick="return confirm('Are you sure you want to Deactive this ** Driver **?');" title="Hide"> <i class="mdi mdi-eye text-success icon-lg"></i></a>
                                             
@@ -135,8 +140,6 @@ include('../db/config.php');
 
                                             <a href="driver-status.php?s_user_id=<?php echo htmlentities($row['driver_id']);?>" onclick="return confirm('Are you sure you want to Active this ** Driver **?');" title="Show"> <i class="mdi mdi-eye-off text-danger icon-lg"></i></a> 
                                             <?php } ?>
-                                          
-
                   <a href="driver-edit?driver_id=<?php echo htmlentities($row['driver_id']);?>" title="Edit"
                     >
                     <i class="mdi mdi-pencil-box-outline text-warning icon-lg"></i>  
@@ -146,6 +149,35 @@ include('../db/config.php');
                    <a href="driver-delete.php?driver_id=<?php echo $row['driver_id']?>" onClick="return confirm('Are you sure you want to delete???')" title="Delete"> <i class="mdi mdi-close-box-outline text-danger icon-lg"></i></a>
 
                                                             </td>
+                                                            <td>
+                                                                <?php
+                                                                if ($row['leave_start']=='') {
+                                                                    echo "No Data"; 
+                                                                }
+                                                                else{
+                                                                    echo date("M j, Y", strtotime($row['leave_start'])); 
+                                                                }
+
+                                                                ?>
+
+                                                            </td>
+
+                                                            <td>
+                                                                <?php
+                                                                if ($row['leave_end']=='') {
+                                                                    echo "No Data"; 
+                                                                }
+                                                                else{
+                                                                    echo date("M j, Y", strtotime($row['leave_end'])); 
+                                                                }
+
+                                                                ?>
+
+                                                            </td>
+
+
+
+
                                                     </tr>
                                                     <?php } ?>
                                                 </tbody>
