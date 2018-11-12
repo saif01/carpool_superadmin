@@ -125,22 +125,24 @@ foreach($result as $row)
 
             </div>
 
+
 <script>
 
   $(document).ready(function() {
-    var initialLocaleCode = 'en';
 
     $('#calendar').fullCalendar({
       header: {
         left: 'prev,next today',
         center: 'title',
-        right: 'month,agendaWeek,agendaDay,listMonth'
+        right: 'month,agendaWeek,agendaDay,listWeek'
       },
       //defaultDate: '2018-03-12',
-      locale: initialLocaleCode,
-      buttonIcons: false, // show the prev/next text
-      weekNumbers: true,
       navLinks: true, // can click day/week names to navigate views
+
+      weekNumbers: true,
+      weekNumbersWithinDays: true,
+      weekNumberCalculation: 'ISO',
+
       editable: true,
       eventLimit: true, // allow "more" link when too many events
       events: <?php echo json_encode($data); ?>

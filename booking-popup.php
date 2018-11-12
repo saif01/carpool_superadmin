@@ -178,7 +178,7 @@ error:function (){}
                 <div class="col-lg-5 col-md-8 m-auto">
                 	<div class="login-page-content">
                 		<div class="login-form">
-                			<h3>Car Booking Info. <span id="user-availability-status1" style="font-size:12px;"></span>
+                			<h3>Car Booking Entry <span id="user-availability-status1" style="font-size:12px;"></span>
                             </h3>
 							<form action="" method="POST">
 								<div class="name">

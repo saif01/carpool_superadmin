@@ -61,7 +61,7 @@ if ($car_status==1) {
                             <!-- Articles Thumbnail End -->
 
                             <!-- Articles Content Start -->
-                            <div class="col-lg-5 ">
+                            <div class="col-lg-4">
                                 <div class="display-table">
                                     <div class="display-table-cell">
                                         <div class="article-body">
@@ -128,7 +128,7 @@ if ($car_status==1) {
                             </div>
                             <!-- Articles Content End -->
 
-                    <div class="col-lg-2 ">
+                    <div class="col-lg-3">
 
                     	<?php    
 $car_id=$row['car_id'];     

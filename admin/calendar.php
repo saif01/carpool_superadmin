@@ -138,31 +138,34 @@ foreach($result as $row)
 
 
 
-
         <script>
-            $(document).ready(function() {
-                var initialLocaleCode = 'en';
 
-                $('#calendar').fullCalendar({
-                    header: {
-                        left: 'prev,next today',
-                        center: 'title',
-                        right: 'month,agendaWeek,agendaDay,listMonth'
-                    },
-                    //defaultDate: '2018-03-12',
-                    locale: initialLocaleCode,
-                    buttonIcons: false, // show the prev/next text
-                    weekNumbers: true,
-                    navLinks: true, // can click day/week names to navigate views
-                    editable: true,
-                    eventLimit: true, // allow "more" link when too many events
-                    events: <?php echo json_encode($data); ?>
+  $(document).ready(function() {
 
-                });
+    $('#calendar').fullCalendar({
+      header: {
+        left: 'prev,next today',
+        center: 'title',
+        right: 'month,agendaWeek,agendaDay,listWeek'
+      },
+      //defaultDate: '2018-03-12',
+      navLinks: true, // can click day/week names to navigate views
 
+      weekNumbers: true,
+      weekNumbersWithinDays: true,
+      weekNumberCalculation: 'ISO',
 
-            });
-        </script>
+      editable: true,
+      eventLimit: true, // allow "more" link when too many events
+      events: <?php echo json_encode($data); ?>
+        
+    });
+
+    
+  });
+
+</script>
+
 
     </body>
 
