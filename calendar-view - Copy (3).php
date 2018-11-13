@@ -5,11 +5,10 @@ if(strlen($_SESSION['username'])==0)
   { 
 header('location:index');
 }
-else{
-$currentTime = date( 'Y-m-d h:i:s', time () );
-
+else{  
  include('db/config.php');
 include('db/calDB.php');
+//$connect = new PDO('mysql:host=localhost;dbname=carpool', 'root', '123456');
 $car_id= $_GET['car_id'];
 
 $username= $_SESSION['username'];
@@ -56,7 +55,6 @@ $car_img=$value['car_img1'];
 
 if (isset($_POST['submit'])) {
 
-    $start_date= $_POST['start_date'];
     $start_book= $_POST['start_date'] . ' ' . $_POST['start_time'];
     $end_book= $_POST['end_date'] . ' ' . $_POST['return_time'];  
 
@@ -67,33 +65,15 @@ if (isset($_POST['submit'])) {
         $days = round($seconds/(60*60*24));
         //$days2 = $seconds/(60*60*24);
   //Start Time Subtraction and convert to days.
- 
-        $currentTime = date( 'Y-m-d h:i:s', time () );   
-      $ts3   =   strtotime($currentTime);
-      $ts4    =   strtotime($start_book);
-      $seconds    = abs($ts3 - $ts4); # difference will always be positive
-      $afterdays = round($seconds/(60*60*24));
 
         if ($days>=7) {
             
        $_SESSION['error']="7";
         }
 
-        elseif( $afterdays >= '30')
-                {
-                  $_SESSION['error']="30d";
-                }
-
-        elseif(date($start_date) < date('Y-m-d'))
-                {
-                  $_SESSION['error']="pre";
-                }
-
         else{
 
-            $sql=mysqli_query($con,"SELECT * FROM `car_booking` WHERE `car_id` ='$car_id' AND (date(`start_date`) BETWEEN date('$start_book') AND date('$end_book') OR date(`end_date`) BETWEEN date('$start_book') AND date('$end_book') )");
-
-            //SELECT * FROM `car_booking` WHERE `car_id` ='$car_id' AND (date(`start_date`) BETWEEN date('2018-11-03') AND date('2018-11-03') OR date(`end_date`) BETWEEN date('2018-11-03') AND date('2018-11-03') )
+            $sql=mysqli_query($con,"SELECT * FROM `car_booking` WHERE `car_id` ='$car_id' AND (`start_date` BETWEEN '$start_book' AND '$end_book' OR `end_date` BETWEEN '$start_book' AND '$end_book')");
 
                 $result=mysqli_num_rows($sql);
 
@@ -104,7 +84,6 @@ if (isset($_POST['submit'])) {
                    
                 }
 
-                
                 else
                 {
 
@@ -147,7 +126,7 @@ if (isset($_POST['submit'])) {
     <!--=== Favicon ===-->
     <link rel="shortcut icon" href="favicon.ico" type="image/x-icon" />
 
-    <title>CPBCarPool</title>
+    <title>CPBCarPull</title>
     <link rel="icon" type="img/png" href="img/logo.png"/>
 
     <!--=== Bootstrap CSS ===-->
@@ -169,14 +148,14 @@ if (isset($_POST['submit'])) {
     <!--=== Responsive CSS ===-->
     <link href="assets/css/responsive.css" rel="stylesheet">
 
-  <!-- For Calendar Load Links -->
-<link href='admin/cal/fullcalendar.min.css' rel='stylesheet' />
-<link href='admin/cal/fullcalendar.print.min.css' rel='stylesheet' media='print' />
-<script src='admin/cal/lib/moment.min.js'></script>
-<script src='admin/cal/lib/jquery.min.js'></script>
-<script src='admin/cal/fullcalendar.min.js'></script>
-<script src='admin/cal/locale-all.js'></script>
 
+
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fullcalendar/3.4.0/fullcalendar.css" />
+  <!--<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.0.0-alpha.6/css/bootstrap.css" /> -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.18.1/moment.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/fullcalendar/3.4.0/fullcalendar.min.js"></script>
 
 
 <style>
@@ -185,7 +164,7 @@ if (isset($_POST['submit'])) {
     background-color: #f44336;
     color: white;
 }
- 
+
 .closebtn {
     margin-left: 15px;
     color: white;
@@ -203,43 +182,27 @@ if (isset($_POST['submit'])) {
 </style>
 
 <?php  include('include/manu.php'); ?>
-
-
-
-<script>
-
-  $(document).ready(function() {
-
-    $('#calendar').fullCalendar({
-      header: {
-        left: 'prev,next today',
-        center: 'title',
-        right: 'month,agendaWeek,agendaDay,listWeek'
-      },
-      //defaultDate: '2018-03-12',
-      navLinks: true, // can click day/week names to navigate views
-
-      weekNumbers: true,
-      weekNumbersWithinDays: true,
-      weekNumberCalculation: 'ISO',
-
-      editable: true,
-      eventLimit: true, // allow "more" link when too many events
-      events: <?php echo json_encode($data); ?>
-        
-    });
-
-    
-  });
-
-</script>
-
-
-
-
-
   
+<script>
+   
+  $(document).ready(function() {
+   var calendar = $('#calendar').fullCalendar({
+    editable:true,
+    header:{
+     left:'prev,next today',
+     center:'title',
+     right:'month,agendaWeek,agendaDay'
+    },
+    //events: 'cal/load.php',
+    events: <?php echo json_encode($data); ?>,
+    //selectable:true,
+    selectHelper:true,
 
+
+   });
+  });
+   
+  </script>
 
 <script>
                     function show() {
@@ -258,8 +221,9 @@ if (isset($_POST['submit'])) {
 
                     }
 
-                </script>
 
+
+                </script>
 
     <!--== Header Area End ==-->
   </head>
@@ -270,95 +234,79 @@ if (isset($_POST['submit'])) {
 <section id="lgoin-page-wrap" class="section-padding">
         <div class="container">
             <div class="row">
-                <div class="col-lg-6 col-md-8 m-auto">
+                <div class="col-lg-5 col-md-8 m-auto">
                   <div class="login-page-content">
-					           <div class="login-form">
-                      <h3>Car Booking Entry</h3> 
+            <div class="login-form">
+                      <h3>Car Booking Info.</h3> 
 
-          						<?php 
-                      if ($_SESSION['error']=="") 
-                      {
-          						  echo htmlentities($_SESSION['error']="");
 
-          						}
-                      if($_SESSION['error']=="booked")
-                        {?>
-          						<div class="alert">
-          						  <span class="closebtn" onclick="this.parentElement.style.display='none';">&times;</span> 
-          						  <strong>Sorry!</strong> This Car Booked By Another User!!!.
-          						</div>
-          						<?php
-          						echo htmlentities($_SESSION['error']="");
-          						 }
-                       if($_SESSION['error']=="7")
-                        { ?>
-          						<div class="alert">
-          						  <span class="closebtn" onclick="this.parentElement.style.display='none';">&times;</span> 
-          						  <strong>Sorry!</strong> You can not Book more than Saven days !!.
-          						</div>
-          						<?php 
-          						echo htmlentities($_SESSION['error']="");
-          						 } 
+<?php if ($_SESSION['error']=="") {
+  echo htmlentities($_SESSION['error']="");
 
-                       if($_SESSION['error']=="pre")
-                        { ?>
-                      <div class="alert">
-                        <span class="closebtn" onclick="this.parentElement.style.display='none';">&times;</span> 
-                        <strong>Sorry!</strong> You can not Book Previous Date !!.
-                      </div>
-                      <?php 
-                      echo htmlentities($_SESSION['error']="");
-                       } 
-
-                       if($_SESSION['error']=="30d")
-                        { ?>
-                      <div class="alert">
-                        <span class="closebtn" onclick="this.parentElement.style.display='none';">&times;</span> 
-                        <strong>Sorry!</strong> You can not Book after 30 Dates from Now!!.
-                      </div>
-                      <?php 
-                      echo htmlentities($_SESSION['error']="");
-                       } 
-              
-                       ?>
-
+}if($_SESSION['error']=="booked"){?>
+<div class="alert">
+  <span class="closebtn" onclick="this.parentElement.style.display='none';">&times;</span> 
+  <strong>Sorry!</strong> This Car Booked By Another User!!!.
+</div>
+<?php
+echo htmlentities($_SESSION['error']="");
+ }if($_SESSION['error']=="7"){ ?>
+<div class="alert">
+  <span class="closebtn" onclick="this.parentElement.style.display='none';">&times;</span> 
+  <strong>Sorry!</strong> You can not Book more than Saven days !!.
+</div>
+<?php 
+echo htmlentities($_SESSION['error']="");
+ } ?>
               <form action="" method="POST">
-                
 
+                <div class="name">
                   <div class="row">
                     <div class="col-md-6">
-                      
                       <label>Pic-Up DATE:
-                          <input type="date"  name="start_date"  placeholder="Pick Up Date" required />
-                         
-                       </label>
+                                    <input type="date" id="date1"  name="start_date" placeholder="Pick Up Date" required />
+
+                                    <span class="first" "></span>
+
+                                        </label>
+
+
                     </div>
-                    <div class="col-md-6" >
-                      
-                        <label>Return DATE: 
-                            <input type="date"  name="end_date"   placeholder="Return Date" required />                                        
-                        </label>                                            
+                    <div class="col-md-6">
+                                            <span id="user-availability-status1" style="font-size:12px;"></span>
+                      <label>Return DATE: 
+                                        <input type="date"  name="end_date" id="check_value" onBlur="userAvailability()" placeholder="Return Date" required />
+
+                                        
+                                          </label>
+
+                                            
                     </div>
                   </div>
-                
 
-          
+                </div>
+                <!-- <div class="username">
+                  <label>Location:  
+                                        <input type="text"  name="location" placeholder="Where You Go" />
+                                          </label>
+                </div> -->
+
                 <div class="row">
                     <div class="col-md-6">
                        <div class="pickup-location book-item">
-                      <label>Choose Location : </label>
-                                  
-                        <select name="location" class="custom-select" required>
-                            <option value="">Select Location</option> 
+                      <label>Location: </label>
+                                   <!--  <input type="text"  name="location" placeholder="location" /> -->
+                                   <select name="location" class="custom-select" required>
+                                   <option value="">Select Location</option> 
                                     
-									<?php
-										$query2=mysqli_query($con,"SELECT `location` FROM `location`");
+<?php
+    $query2=mysqli_query($con,"SELECT `location` FROM `location`");
 
-												while ($row2 = mysqli_fetch_array($query2))
-												{
-									echo "<option value='". $row2['location'] ."'>" .$row2['location'] . "</option>" ;
-									}
-									?>
+            while ($row2 = mysqli_fetch_array($query2))
+            {
+echo "<option value='". $row2['location'] ."'>" .$row2['location'] . "</option>" ;
+}
+?>
 
                                    </select>
                               </div>          
@@ -367,20 +315,20 @@ if (isset($_POST['submit'])) {
               <div class="col-md-6">
                 <div class="pickup-location book-item">
 
-                      <label>Booking Time : </label>
-                            <select name="for_car" class="custom-select" id="time_show" onChange="return show();" >
-                                  <option value="">Full day </option>   
-                                  <option value="manual_input">Manual Input </option>
-                            </select>
+                      <label>Booking Time: </label>
+                                        <select name="for_car" class="custom-select" id="time_show" onChange="return show();" >
+                                                <option value="">Full day </option>   
+                                                <option value="manual_input">Manual Input </option>
+                                        </select>
                                           
-                    </div>
-                </div>  
+                                      </div>
+                            </div>  
                             
                             <div class="col-lg-12">        
                               <div id="manual_input_show" class="pickup-location book-item " style=" display:none; ">
                                     <div class="row">
-                                        <div class="col-lg-6 " >
-                                            <label>Booking Start time :
+                                        <div class="col-lg-6">
+                                            <label >Start time :
                                     <select name="start_time" class="custom-select" > 
                                         <option value="01:00:00">Select Time </option>
                                             <option value="09:00:00">9.00 AM </option>
@@ -408,7 +356,7 @@ if (isset($_POST['submit'])) {
                                         </div>
 
                                         <div  class="col-md-6">
-                                            <label>Booking Return Time :
+                                            <label>Return Time :
                                         <select name="return_time" class="custom-select"> 
                                           <option value="23:59:00">Select Time </option>
                                             <option value="09:00:00">9.00 AM </option>
@@ -437,7 +385,8 @@ if (isset($_POST['submit'])) {
                                         
                                     </div>
                                 </div>
-                           </div>
+
+                    </div>
                   </div>
 
                 
@@ -449,16 +398,25 @@ if (isset($_POST['submit'])) {
               </form>
                     </div>
  
+            
+ 
+
 
                 </div>
           </div>
 
 
-        <div class="col-lg-6 col-md-8 m-auto">
+<div class="col-lg-7 col-md-8 m-auto">
                   <div class="login-page-content">
-                          <div id="calendar"></div>                    
-                  </div>                    
-        </div>
+                   
+                    
+<div id="calendar"></div>
+                    
+                  </div>
+
+
+                    
+                </div>
 
 
 </div>
@@ -482,7 +440,7 @@ if (isset($_POST['submit'])) {
                 <div class="row">
                     <div class="col-lg-12 text-center">
                         <p>
-Copyright &copy;<script>document.write(new Date().getFullYear()); </script> C.P.Bangladesh CarPool <i class="fa fa-heart-o" aria-hidden="true"></i> by <a href="#" target="_blank"> </a> CPB-IT.
+Copyright &copy;<script>document.write(new Date().getFullYear()); </script> C.P.Bangladesh<i class="fa fa-heart-o" aria-hidden="true"></i> by <a href="#" target="_blank"> </a> CPB-IT.
 </p>
                     </div>
                 </div>
@@ -548,4 +506,3 @@ Copyright &copy;<script>document.write(new Date().getFullYear()); </script> C.P.
 </html>
 
 <?php } ?>
-

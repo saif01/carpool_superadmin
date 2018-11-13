@@ -88,7 +88,7 @@ include('../db/config.php');
 ?>
                                                     <tr>
 
-                                                        <td><img src="p_img/carImg/<?php echo($row['car_img1']);?>" class="img-responsive" alt="Car Img" height="42" width="70" /></td>
+                                                        <td><img src="../admin/p_img/carImg/<?php echo($row['car_img1']);?>" class="img-responsive" alt="Car Img" height="42" width="70" /></td>
                                                         <td class="center">
                                                             <?php echo htmlentities($row['car_name']) ; ?>
                                                         </td>

@@ -2,7 +2,7 @@
 session_start();
 error_reporting(0);
 date_default_timezone_set('Asia/Dhaka');// change according timezone
-$currentTime = date( 'Y-m-d h:i:s', time () );
+$currentTime = date( 'Y-m-d H:i:s', time () );//H, Time in 24 hours show , h, for 12 hours 
 $currentDate=date('Y-m-d');
 
 if(strlen($_SESSION['username'])==0)
@@ -116,7 +116,8 @@ $edate2=$date2->format('d-m-Y h:i:s A');
                                                 <div class="car-list-info">
                                                     <h2>
                                                 <a href="#">
-                                            <?php echo htmlentities($row['car_name']); ?>
+                                            <?php echo htmlentities($row['car_name']); ?> --: <?php echo htmlentities($row['car_number']); ?> 
+
                                                         </a>
                                                     </h2>
                                                 <ul class="car-info-list">

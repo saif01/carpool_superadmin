@@ -176,7 +176,7 @@ if (isset($_POST['leave_cancel'])) {
                                     <div class="row">
                                                 <div class="col-12 text-center">
                                                     <button type="submit" name="submit" class="btn btn-outline-success btn-block btn-rounded">Driver leave Entry</button>
-                                                    <button class="btn btn-light btn-block btn-rounded">Clean</button>
+                                                    <button class="btn btn-light btn-block btn-rounded">Reset</button>
                                                 </div>
                                             </div>
 

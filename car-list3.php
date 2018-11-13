@@ -2,7 +2,8 @@
 session_start();
 error_reporting(0);
 date_default_timezone_set('Asia/Dhaka');// change according timezone
-$currentTime = date( 'Y-m-d h:i:s', time () );
+$currentTime = date( 'Y-m-d H:i:s', time () );
+print_r($currentTime);
 
 if(strlen($_SESSION['username'])==0)
   { 
@@ -23,7 +24,7 @@ else{
                 <!-- Page Title Start -->
                 <div class="col-lg-12">
                     <div class="section-title  text-center">
-                        <h2>Our Car's..</h2>
+                        <h2>Our Regular Car's.. </h2>
                         <span class="title-line"><i class="fa fa-car"></i></span>
                        <!--  <p>C.P. Bangladesh Car List.. </p> -->
                     </div>
@@ -67,14 +68,15 @@ else{
                                             <div class="article-date">
 
                                     <?php
-                             $st2=DATE('Y-m-d');
+                             //$st2=DATE('Y-m-d');
                              $car_id=$row['car_id'];
 
-                             //$query3=mysqli_query($con,"SELECT `start_date` FROM `car_booking` WHERE `car_id` ='$car_id' AND DATE(`start_date`) = '$st2' ");
+                             $query3=mysqli_query($con,"SELECT * FROM `car_booking` WHERE `car_id`='$car_id' AND '$currentTime' BETWEEN `start_date` AND `end_date`");
 
+                             //$query3=mysqli_query($con,"SELECT * FROM `car_booking` WHERE `car_id`=$car_id AND '' BETWEEN date(`start_date`) AND date(`end_date`)");
 
+                             //SELECT * FROM `car_booking` WHERE `car_id`='$car_id' AND '$currTime' BETWEEN `start_date` AND `end_date`
 
-                             $query3=mysqli_query($con,"SELECT * FROM `car_booking` WHERE `car_id`=$car_id AND date('$st2') BETWEEN date(`start_date`) AND date(`end_date`)");
 
                              //$row3=$query3->fetch_assoc();
                              $row3=mysqli_num_rows($query3);

@@ -10,7 +10,7 @@ $currentTime = date( 'Y-m-d h:i:s', time () );
 
  include('db/config.php');
 include('db/calDB.php');
-$connect = new PDO('mysql:host=localhost;dbname=carpull', 'root', '123456');
+
 $car_id= $_GET['car_id'];
 
 $username= $_SESSION['username'];
@@ -57,9 +57,9 @@ $car_img=$value['car_img1'];
 
 if (isset($_POST['submit'])) {
 
-    $start_date= $_POST['start_date'];
+   $start_date=$_POST['start_date'];
     $start_book= $_POST['start_date'] . ' ' . $_POST['start_time'];
-    $end_book= $_POST['end_date'] . ' ' . $_POST['return_time'];  
+    $end_book= $_POST['start_date'] . ' ' . $_POST['return_time'];  
 
     //Start Time Subtraction and convert to days.
         $ts1    =   strtotime($start_book);
@@ -75,26 +75,18 @@ if (isset($_POST['submit'])) {
       $seconds    = abs($ts3 - $ts4); # difference will always be positive
       $afterdays = round($seconds/(60*60*24));
 
-        if ($days>=7) {
-            
-       $_SESSION['error']="7";
-        }
+      
 
-        elseif( $afterdays >= '30')
-                {
-                  $_SESSION['error']="30d";
-                }
-
-        elseif(date($start_date) < date('Y-m-d'))
+        if(date($start_date) < date('Y-m-d'))
                 {
                   $_SESSION['error']="pre";
                 }
 
         else{
 
-            $sql=mysqli_query($con,"SELECT * FROM `car_booking` WHERE `car_id` ='$car_id' AND (date(`start_date`) BETWEEN date('$start_book') AND date('$end_book') OR date(`end_date`) BETWEEN date('$start_book') AND date('$end_book') )");
+            $sql=mysqli_query($con,"SELECT * FROM `car_booking` WHERE `car_id`='$car_id' AND '$start_book' BETWEEN `start_date` AND `end_date`");
 
-            //SELECT * FROM `car_booking` WHERE `car_id` ='$car_id' AND (date(`start_date`) BETWEEN date('2018-11-03') AND date('2018-11-03') OR date(`end_date`) BETWEEN date('2018-11-03') AND date('2018-11-03') )
+            //SELECT * FROM `car_booking` WHERE `car_id`='$car_id' AND '$start_book' BETWEEN `start_date` AND `end_date` 
 
                 $result=mysqli_num_rows($sql);
 
@@ -111,7 +103,7 @@ if (isset($_POST['submit'])) {
 
                    
                     $start_book= $_POST['start_date'] . ' ' . $_POST['start_time'];
-                    $end_book= $_POST['end_date'] . ' ' . $_POST['return_time'];
+                    $end_book= $_POST['start_date'] . ' ' . $_POST['return_time'];
 
                     $location=$_POST['location'];
 
@@ -124,7 +116,7 @@ if (isset($_POST['submit'])) {
                     ?>
                     <script>
                         alert('Update successfull..  !');
-                        window.open('car-list3.php','_self');
+                        window.open('car-list-temp.php','_self');
                         </script>
                     <?php 
 
@@ -246,7 +238,7 @@ if (isset($_POST['submit'])) {
                 <div class="col-lg-6 col-md-8 m-auto">
                   <div class="login-page-content">
 					           <div class="login-form">
-                      <h3>Car Booking Info.</h3> 
+                      <h3>Temporary Car Booking Entry</h3> 
 
           						<?php 
                       if ($_SESSION['error']=="") 
@@ -263,15 +255,7 @@ if (isset($_POST['submit'])) {
           						<?php
           						echo htmlentities($_SESSION['error']="");
           						 }
-                       if($_SESSION['error']=="7")
-                        { ?>
-          						<div class="alert">
-          						  <span class="closebtn" onclick="this.parentElement.style.display='none';">&times;</span> 
-          						  <strong>Sorry!</strong> You can not Book more than Saven days !!.
-          						</div>
-          						<?php 
-          						echo htmlentities($_SESSION['error']="");
-          						 } 
+                      
 
                        if($_SESSION['error']=="pre")
                         { ?>
@@ -283,15 +267,7 @@ if (isset($_POST['submit'])) {
                       echo htmlentities($_SESSION['error']="");
                        } 
 
-                       if($_SESSION['error']=="30d")
-                        { ?>
-                      <div class="alert">
-                        <span class="closebtn" onclick="this.parentElement.style.display='none';">&times;</span> 
-                        <strong>Sorry!</strong> You can not Book after 30 Dates from Now!!.
-                      </div>
-                      <?php 
-                      echo htmlentities($_SESSION['error']="");
-                       } 
+                       
               
                        ?>
 
@@ -299,19 +275,14 @@ if (isset($_POST['submit'])) {
                 
 
                   <div class="row">
-                    <div class="col-md-6">
+                    <div class="col-md-12">
                       
                       <label>Pic-Up DATE:
                           <input type="date"  name="start_date"  placeholder="Pick Up Date" required />
                          
                        </label>
                     </div>
-                    <div class="col-md-6" >
-                      
-                        <label>Return DATE: 
-                            <input type="date"  name="end_date"   placeholder="Return Date" required />                                        
-                        </label>                                            
-                    </div>
+                    
                   </div>
                 
 
@@ -362,7 +333,7 @@ if (isset($_POST['submit'])) {
                                             <option value="15:30:00">3.30 PM </option>
                                             <option value="16:00:00">4.00 PM </option>
                                             <option value="16:30:00">4.30 PM </option>
-                                            <option value="18:00:00">5.00 PM </option>
+                                            <option value="17:00:00">5.00 PM </option>
                                             
                                                                                   
                                          </select>
@@ -389,7 +360,7 @@ if (isset($_POST['submit'])) {
                                             <option value="15:30:00">3.30 PM </option>
                                             <option value="16:00:00">4.00 PM </option>
                                             <option value="16:30:00">4.30 PM </option>
-                                            <option value="18:00:00">5.00 PM </option>
+                                            <option value="17:00:00">5.00 PM </option>
                                             
                                                                                   
                                          </select>
