@@ -5,7 +5,7 @@ if(strlen($_SESSION['SadminName'])==0)
   { 
 header('location:../admin/login');
 }
-else{ 
+else{  
 include('../db/config.php');
 ?>
     <!DOCTYPE html>
@@ -72,16 +72,16 @@ include('../db/config.php');
                                                         <th>Car</th>
                                                         <th>Name</th>
                                                         <th>Number</th>
-                                                        <th>Type</th>
+                                                       <!--  <th>Type</th> -->
                                                         <th>Capacity</th>
-
+                                                        <th>Status</th>
                                                         <th>Actions</th>
                                                         
                                                     </tr>
                                                 </thead>
                                                 <tbody>
                                                     <?php 
-	$query=mysqli_query($con," SELECT * FROM `tbl_car`");
+    $query=mysqli_query($con," SELECT * FROM `tbl_car`");
     while($row=mysqli_fetch_array($query))
     {
 
@@ -95,12 +95,25 @@ include('../db/config.php');
                                                         <td class="center">
                                                             <?php echo htmlentities($row['car_namePlate']); ?>
                                                         </td>
-                                                        <td class="center">
-                                                            <?php echo htmlentities($row['car_type']); ?>
-                                                        </td>
+                                                        
                                                         <td class="center">
                                                             <?php echo htmlentities($row['car_capacity']); ?>
                                                         </td>
+                                                        <td>
+                                                            
+                                                            <?php
+                                         if($row['temp_car']==1)
+                                         {?>
+                                            <a href="car-status-temp.php?h_car_id=<?php echo htmlentities($row['car_id']);?>" onclick="return confirm('Are you sure you want to make this ** Normal Car **?');" title="Normal"> <button class="btn btn-info">Temporary</button></a>
+
+                                            
+                                        <?php } else {?>
+
+                                            <a href="car-status-temp.php?s_car_id=<?php echo htmlentities($row['car_id']);?>" onclick="return confirm('Are you sure you want to Make this ** Temporary Car **?');" title="Temporary"> <button class="btn btn-success">Nornal</button> </a> 
+                                            <?php } ?>
+
+                                                        </td>
+
 
                                                         <td class="center">
                                                             <?php

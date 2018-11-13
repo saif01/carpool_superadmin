@@ -33,9 +33,9 @@ $remarks=$_POST['remarks'];
 // $imgB=$_FILES["imgB"]["name"];
 // $imgC=$_FILES["imgC"]["name"];
 
-// move_uploaded_file($_FILES["imgA"]["tmp_name"],"p_img/carImg/".$_FILES["imgA"]["name"]);
-// move_uploaded_file($_FILES["imgB"]["tmp_name"],"p_img/carImg/".$_FILES["imgB"]["name"]);
-// move_uploaded_file($_FILES["imgC"]["tmp_name"],"p_img/carImg/".$_FILES["imgC"]["name"]);
+// move_uploaded_file($_FILES["imgA"]["tmp_name"],"../admin/p_img/carImg/".$_FILES["imgA"]["name"]);
+// move_uploaded_file($_FILES["imgB"]["tmp_name"],"../admin/p_img/carImg/".$_FILES["imgB"]["name"]);
+// move_uploaded_file($_FILES["imgC"]["tmp_name"],"../admin/p_img/carImg/".$_FILES["imgC"]["name"]);
 $car_id=$_GET['car_id'];
 
 $query=mysqli_query($con,"UPDATE `tbl_car` SET `car_name`='$car_name',`car_namePlate`='$car_namePlate',`car_type`='$car_type',`car_capacity`='$car_capacity',`car_door`='$car_door',`car_gearbox`='$car_gearbox',`car_gps`='$car_gps',`car_aircobdition`='$car_aircondition',`car_power_doorLock`='$car_power_doorLock',`car_cdPlayer`='$car_cd_player',`car_remarks`='$remarks' WHERE `car_id`='$car_id'");

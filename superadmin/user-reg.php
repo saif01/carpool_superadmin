@@ -20,7 +20,7 @@ $user_img=$_FILES["user_img"]["name"];
 
 $user_status = 1;
 
-move_uploaded_file($_FILES["user_img"]["tmp_name"],"p_img/userImg/".$_FILES["user_img"]["name"]);
+move_uploaded_file($_FILES["user_img"]["tmp_name"],"../admin/p_img/userImg/".$_FILES["user_img"]["name"]);
 
 
 $query=mysqli_query($con," INSERT INTO `user`(`user_name`, `user_pass`, `user_contract`, `user_img`, `user_officeId`, `user_status`) VALUES ('$user_name','$user_pass','$user_contract','$user_img','$user_officeId','$user_status')");

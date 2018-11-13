@@ -113,7 +113,7 @@ $edate2=$date2->format('d-m-Y h:i:s A');
                                                 <div class="car-list-info">
                                                     <h2>
                                                 <a href="#">
-                                            <?php echo htmlentities($row['car_name']); ?>
+                                            <?php echo htmlentities($row['car_name']); ?>  --  <?php echo htmlentities($row['car_number']); ?>
                                                         </a>
                                                     </h2>
                                                 <ul class="car-info-list">

@@ -129,16 +129,16 @@ foreach($result as $row)
 
 
         <!-- For Calendar Load Links -->
-        <link href='cal/fullcalendar.min.css' rel='stylesheet' />
-        <link href='cal/fullcalendar.print.min.css' rel='stylesheet' media='print' />
-        <script src='cal/lib/moment.min.js'></script>
-        <script src='cal/lib/jquery.min.js'></script>
-        <script src='cal/fullcalendar.min.js'></script>
-        <script src='cal/locale-all.js'></script>
+        <link href='../admin/cal/fullcalendar.min.css' rel='stylesheet' />
+        <link href='../admin/cal/fullcalendar.print.min.css' rel='stylesheet' media='print' />
+        <script src='../admin/cal/lib/moment.min.js'></script>
+        <script src='../admin/cal/lib/jquery.min.js'></script>
+        <script src='../admin/cal/fullcalendar.min.js'></script>
+        <script src='../admin/cal/locale-all.js'></script>
 
 
 
-<script>
+        <script>
 
   $(document).ready(function() {
 

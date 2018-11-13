@@ -104,7 +104,7 @@ if (isset($_POST['leave_cancel'])) {
                         <div class="col-lg-4 mx-auto">
                             <div class="auto-form-wrapper">
 
-                                <img class="user-s" src="p_img/driverimg/<?php echo($row['driver_img']);?>" class="img-responsive" alt="Image" />
+                                <img class="user-s" src="../admin/p_img/driverimg/<?php echo($row['driver_img']);?>" class="img-responsive" alt="Image" />
                                 <table>
 
 

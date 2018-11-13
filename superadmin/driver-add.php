@@ -25,7 +25,7 @@ $driver_st=1;
 $driver_img=$_FILES["driver_img"]["name"];
 
 
-move_uploaded_file($_FILES["driver_img"]["tmp_name"],"p_img/driverimg/".$_FILES["driver_img"]["name"]);
+move_uploaded_file($_FILES["driver_img"]["tmp_name"],"../admin/p_img/driverimg/".$_FILES["driver_img"]["name"]);
 
  $query=mysqli_query($con,"INSERT INTO `car_driver`(`car_id`, `driver_name`, `driver_phone`, `driver_img`, `driver_license`, `driver_nid`, `driver_status`) VALUES ('$for_car','$driver_name','$driver_phone','$driver_img','$driver_license','$driver_nid','$driver_st')");
 

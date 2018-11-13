@@ -26,7 +26,7 @@ $driver_id=$_GET['driver_id'];
 //$driver_img=$_FILES["driver_img"]["name"];
 
 
-//move_uploaded_file($_FILES["driver_img"]["tmp_name"],"p_img/driverimg/".$_FILES["driver_img"]["name"]);
+//move_uploaded_file($_FILES["driver_img"]["tmp_name"],"../admin/p_img/driverimg/".$_FILES["driver_img"]["name"]);
 
  $query=mysqli_query($con,"UPDATE `car_driver` SET `driver_name`='$driver_name',`driver_phone`='$driver_phone',`driver_license`='$driver_license',`driver_nid`='$driver_nid',`driver_status`='$driver_st' WHERE `driver_id` ='$driver_id'");
 

@@ -21,7 +21,7 @@ $admin_img=$_FILES["admin_img"]["name"];
 
 $admin_status = 1;
 
-move_uploaded_file($_FILES["admin_img"]["tmp_name"],"p_img/adminimg/".$_FILES["admin_img"]["name"]);
+move_uploaded_file($_FILES["admin_img"]["tmp_name"],"../admin/p_img/adminimg/".$_FILES["admin_img"]["name"]);
 
 
 $query=mysqli_query($con,"INSERT INTO `admin`(`admin_name`, `admin_password`, `admin_img`, `admin_phone`, `admin_officeID`, `admin_status`, `super_admin`) VALUES ('$admin_name','$admin_pass','$admin_img','$admin_contract','$admin_officeId','$admin_status','$super_admin')");

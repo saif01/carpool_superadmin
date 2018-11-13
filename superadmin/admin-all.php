@@ -74,7 +74,7 @@ include('../db/config.php');
 ?>
                                                     <tr>
 
-                                                        <td> <img src="p_img/adminimg/<?php echo($row['admin_img']);?>" class="img-responsive" alt="Image" height="42" width="42" /> </td>
+                                                        <td> <img src="../admin/../admin/p_img/adminimg/<?php echo($row['admin_img']);?>" class="img-responsive" alt="Image" height="42" width="42" /> </td>
                                                         <td class="center">
                                                             <?php echo htmlentities($row['admin_name']) ; ?>
                                                         </td>

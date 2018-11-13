@@ -25,7 +25,7 @@
               $query=mysqli_query($con,"SELECT `admin_img` FROM `admin` WHERE `admin_name`='$admin'");
              $row=$query->fetch_assoc();
                ?>
-              <img class="img-xs rounded-circle" src="p_img/adminimg/<?php echo $row['admin_img']; ?>" alt="Profile image">
+              <img class="img-xs rounded-circle" src="../admin/p_img/adminimg/<?php echo $row['admin_img']; ?>" alt="Profile image">
             </a>
             <div class="dropdown-menu dropdown-menu-right navbar-dropdown" aria-labelledby="UserDropdown">
               

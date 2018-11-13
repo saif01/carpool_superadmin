@@ -93,7 +93,7 @@ include('../db/config.php');
 
                                                         <td>
                                                             <a href="javascript:void(0);" onClick="popUpWindow('driver-profile.php?driver_id=<?php echo htmlentities($row['driver_id']);?>');" title="View Driver Info.">
-                  <img src="p_img/driverimg/<?php echo($row['driver_img']);?>" class="img-responsive" alt="Image" height="42" width="42"/>  
+                  <img src="../admin/p_img/driverimg/<?php echo($row['driver_img']);?>" class="img-responsive" alt="Image" height="42" width="42"/>  
 
 <?php echo htmlentities($row['driver_name']) ; ?>
 
@@ -109,7 +109,7 @@ include('../db/config.php');
 
                 ?>
                     <a href="javascript:void(0);" onClick="popUpWindow('car-profile.php?car_id=<?php echo htmlentities($row['car_id']);?>');" title="View Car Info.">
-                 <img src="p_img/carImg/<?php echo($row2['car_img1']);?>" class="img-responsive" alt="Not Assign" height="42" width="70"/>
+                 <img src="../admin/p_img/carImg/<?php echo($row2['car_img1']);?>" class="img-responsive" alt="Not Assign" height="42" width="70"/>
                 <?php echo htmlentities($row2['car_name'].'--'.$row2['car_namePlate']); ?>
 
                   </a>

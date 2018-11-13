@@ -72,7 +72,7 @@ include('../db/config.php');
 ?>
                                                     <tr>
 
-                                                        <td> <img src="p_img/userImg/<?php echo($row['user_img']);?>" class="img-responsive" alt="Image" height="50" width="50" /> </td>
+                                                        <td> <img src="../admin/p_img/userImg/<?php echo($row['user_img']);?>" class="img-responsive" alt="Image" height="50" width="50" /> </td>
                                                         <td class="center">
                                                             <?php echo htmlentities($row['user_name']) ; ?>
                                                         </td>

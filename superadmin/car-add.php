@@ -18,7 +18,7 @@ $car_capacity=$_POST['car_capacity'];
 $car_gearbox=$_POST['car_gearbox'];
 $car_door=$_POST['car_door'];
 $car_gps=$_POST['car_gps'];
-$temp_car=0;
+$temp_car=$_POST['temp_car'];
 
 $car_aircondition=$_POST['car_aircondition'];
 $car_power_doorLock=$_POST['car_power_doorLock'];
@@ -64,6 +64,22 @@ $query=mysqli_query($con,"INSERT INTO `tbl_car`(`car_name`, `car_namePlate`, `te
         <link rel="stylesheet" href="css/style.css">
         <!-- endinject -->
         <link rel="shortcut icon" href="images/favicon.png" />
+
+         <script>
+            function userAvailability() {
+                $("#loaderIcon").show();
+                jQuery.ajax({
+                    url: "check_car_number.php",
+                    data: 'check_value=' + $("#check_value").val(),
+                    type: "POST",
+                    success: function(data) {
+                        $("#user-availability-status1").html(data);
+                        $("#loaderIcon").hide();
+                    },
+                    error: function() {}
+                });
+            }
+        </script>
     </head>
 
     <body>
@@ -85,17 +101,17 @@ $query=mysqli_query($con,"INSERT INTO `tbl_car`(`car_name`, `car_namePlate`, `te
                                 <div class="card">
                                     <div class="card-body">
                                         <!-- <h4 class="card-title">Car Add Form</h4> -->
-                                        <button class="card-title btn btn-outline btn-block ">Car Add Form</button>
+                                        <button class="card-title btn btn-outline btn-block ">Car Add Form .....</button>
                                         <form class="form-sample" action="" method="post" enctype="multipart/form-data">
 
                                             <div class="row">
                                                 <div class="col-md-6">
                                                     <div class="form-group row">
 
-                                                        <label class="col-sm-3 col-form-label">Car Name </label>
+                                                        <label class="col-sm-3 col-form-label">Car Name :</label>
                                                         <div class="col-sm-9">
 
-                                                            <input type="text" name="car_name" class="form-control" id="typeahead" data-provide="typeahead" data-items="4" data-source='["BMW","Toyota","Suzuki","Mitsubishi","Nissan","Toyota Allion","Toyota Probox","Toyota Noah","Toyota Axio","Toyota Belta","Honda Airwave","Toyota Corolla","Toyota HiAce"]'>
+                                                            <input type="text" name="car_name" class="form-control" id="typeahead" data-provide="typeahead" data-items="4" data-source='["BMW","Toyota","Suzuki","Mitsubishi","Nissan","Toyota Allion","Toyota Probox","Toyota Noah","Toyota Axio","Toyota Belta","Honda Airwave","Toyota Corolla","Toyota HiAce"]' required>
                                                             <p style="color: green;" class="help-block">Start typing to activate auto complete!</p>
 
                                                         </div>
@@ -103,9 +119,11 @@ $query=mysqli_query($con,"INSERT INTO `tbl_car`(`car_name`, `car_namePlate`, `te
                                                 </div>
                                                 <div class="col-md-6">
                                                     <div class="form-group row">
-                                                        <label class="col-sm-3 col-form-label">Car Number</label>
+                                                        <label class="col-sm-3 col-form-label">Car Number :</label>
                                                         <div class="col-sm-9">
-                                                            <input type="text" name="car_namePlate" class="form-control" />
+                                                            <input type="text" name="car_namePlate" class="form-control" id="check_value" onBlur="userAvailability()" required />
+
+                                                            <span id="user-availability-status1" style="font-size:12px;"></span>
                                                         </div>
                                                     </div>
                                                 </div>
@@ -113,23 +131,23 @@ $query=mysqli_query($con,"INSERT INTO `tbl_car`(`car_name`, `car_namePlate`, `te
                                             <div class="row">
                                                 <div class="col-md-6">
                                                     <div class="form-group row">
-                                                        <label class="col-sm-3 col-form-label">Car Type</label>
+                                                        <label class="col-sm-3 col-form-label">Car Type :</label>
                                                         <div class="col-sm-9">
-                                                            <select class="form-control" name="car_type">
+                                                            <select class="form-control" name="car_type" required>
                     <option value=""> Select Value</option>
                   <option value="CNG">CNG</option>
                   <option value="Petrol">Petrol</option>
                   <option value="Diesel">Diesel</option>
-                  
+                  <option value="CNG/Petrol">Both</option>
                   </select>
                                                         </div>
                                                     </div>
                                                 </div>
                                                 <div class="col-md-6">
                                                     <div class="form-group row">
-                                                        <label class="col-sm-3 col-form-label">Car Capacity</label>
+                                                        <label class="col-sm-3 col-form-label">Car Capacity :</label>
                                                         <div class="col-sm-9">
-                                                            <input type="Number" name="car_capacity" class="form-control" />
+                                                            <input type="Number" name="car_capacity" class="form-control" required />
                                                         </div>
                                                     </div>
                                                 </div>
@@ -137,9 +155,9 @@ $query=mysqli_query($con,"INSERT INTO `tbl_car`(`car_name`, `car_namePlate`, `te
                                             <div class="row">
                                                 <div class="col-md-6">
                                                     <div class="form-group row">
-                                                        <label class="col-sm-3 col-form-label">Car GearBox</label>
+                                                        <label class="col-sm-3 col-form-label">Car GearBox :</label>
                                                         <div class="col-sm-9">
-                                                            <select class="form-control" name="car_gearbox">
+                                                            <select class="form-control" name="car_gearbox" required>
                               <option value=""> Select Value</option>
                               <option value="Automatic">Automatic</option>
                               <option value="Manual">Manual</option>
@@ -150,10 +168,10 @@ $query=mysqli_query($con,"INSERT INTO `tbl_car`(`car_name`, `car_namePlate`, `te
 
                                                 <div class="col-md-6">
                                                     <div class="form-group row">
-                                                        <label class="col-sm-3 col-form-label">Car Door</label>
+                                                        <label class="col-sm-3 col-form-label">Car Door :</label>
                                                         <div class="col-sm-9">
 
-                                                            <input type="Number" name="car_door" class="form-control" />
+                                                            <input type="Number" name="car_door" class="form-control" required />
 
                                                         </div>
                                                     </div>
@@ -164,12 +182,12 @@ $query=mysqli_query($con,"INSERT INTO `tbl_car`(`car_name`, `car_namePlate`, `te
 
                                             </div>
                                             <p class="card-description">
-                                                Radio Input
+                                                Radio Input .....
                                             </p>
                                             <div class="row">
                                                 <div class="col-md-6">
                                                     <div class="form-group row">
-                                                        <label class="col-sm-3 col-form-label">Car Aircondition</label>
+                                                        <label class="col-sm-3 col-form-label">Car Aircondition :</label>
                                                         <div class="col-sm-4">
                                                             <div class="form-radio">
                                                                 <label class="form-check-label">
@@ -188,7 +206,7 @@ $query=mysqli_query($con,"INSERT INTO `tbl_car`(`car_name`, `car_namePlate`, `te
                                                 </div>
                                                 <div class="col-md-6">
                                                     <div class="form-group row">
-                                                        <label class="col-sm-3 col-form-label">Power Door Lock</label>
+                                                        <label class="col-sm-3 col-form-label">Power Door Lock :</label>
                                                         <div class="col-sm-4">
                                                             <div class="form-radio">
                                                                 <label class="form-check-label">
@@ -209,7 +227,7 @@ $query=mysqli_query($con,"INSERT INTO `tbl_car`(`car_name`, `car_namePlate`, `te
                                             <div class="row">
                                                 <div class="col-md-6">
                                                     <div class="form-group row">
-                                                        <label class="col-sm-3 col-form-label">CD Player</label>
+                                                        <label class="col-sm-3 col-form-label">CD Player :</label>
                                                         <div class="col-sm-4">
                                                             <div class="form-radio">
                                                                 <label class="form-check-label">
@@ -228,7 +246,7 @@ $query=mysqli_query($con,"INSERT INTO `tbl_car`(`car_name`, `car_namePlate`, `te
                                                 </div>
                                                 <div class="col-md-6">
                                                     <div class="form-group row">
-                                                        <label class="col-sm-3 col-form-label">Car GPS</label>
+                                                        <label class="col-sm-3 col-form-label">Car GPS :</label>
                                                         <div class="col-sm-4">
                                                             <div class="form-radio">
                                                                 <label class="form-check-label">
@@ -254,7 +272,7 @@ $query=mysqli_query($con,"INSERT INTO `tbl_car`(`car_name`, `car_namePlate`, `te
 
                                                 <div class="col-md-4">
                                                     <div class="form-group row">
-                                                        <label class="col-sm-3 col-form-label">First Image</label>
+                                                        <label class="col-sm-3 col-form-label">First Image :</label>
                                                         <div class="col-sm-9">
                                                             <input name="imgA" type="file" class="form-control" />
                                                         </div>
@@ -262,7 +280,7 @@ $query=mysqli_query($con,"INSERT INTO `tbl_car`(`car_name`, `car_namePlate`, `te
                                                 </div>
                                                 <div class="col-md-4">
                                                     <div class="form-group row">
-                                                        <label class="col-sm-3 col-form-label">Second Image</label>
+                                                        <label class="col-sm-3 col-form-label">Second Image :</label>
                                                         <div class="col-sm-9">
                                                             <input name="imgB" type="file" class="form-control" />
                                                         </div>
@@ -270,7 +288,7 @@ $query=mysqli_query($con,"INSERT INTO `tbl_car`(`car_name`, `car_namePlate`, `te
                                                 </div>
                                                 <div class="col-md-4">
                                                     <div class="form-group row">
-                                                        <label class="col-sm-3 col-form-label">Third Image</label>
+                                                        <label class="col-sm-3 col-form-label">Third Image :</label>
                                                         <div class="col-sm-9">
                                                             <input name="imgC" type="file" class="form-control" />
                                                         </div>
@@ -279,17 +297,32 @@ $query=mysqli_query($con,"INSERT INTO `tbl_car`(`car_name`, `car_namePlate`, `te
 
                                             </div>
 
-                                            <div class="row">
-                                                <div class="col-md-12">
+                                           <div class="row">
+                                                <div class="col-md-4">
                                                     <div class="form-group row">
-                                                        <label class="col-sm-2 col-form-label">Car Remarks</label>
-                                                        <div class="col-sm-10">
-                                                            <input type="text" name="remarks" class="form-control form-control-lg">
+                                                        <label class="col-sm-3 col-form-label">Car Status :</label>
+                                                        <div class="col-sm-9">
+                                                            <select class="form-control" name="temp_car" required>
+                              <option value=""> Select Value</option>
+                              <option value="0">Normal Car</option>
+                              <option value="1">Temporary Car</option>
+                            </select>
+                                                        </div>
+                                                    </div>
+                                                </div>
+
+                                                <div class="col-md-8">
+                                                    <div class="form-group row">
+                                                        <label class="col-sm-3 col-form-label">Car Remarks :</label>
+                                                        <div class="col-sm-9">
+
+                                                            <input type="text" name="remarks" class="form-control" />
+
                                                         </div>
                                                     </div>
                                                 </div>
                                             </div>
-
+                                            <hr>
 
                                             <div class="row">
                                                 <div class="col-12 text-center">
@@ -297,10 +330,6 @@ $query=mysqli_query($con,"INSERT INTO `tbl_car`(`car_name`, `car_namePlate`, `te
                                                     <button class="btn btn-light btn-block btn-rounded">Cancel</button>
                                                 </div>
                                             </div>
-
-
-
-
 
 
                                         </form>

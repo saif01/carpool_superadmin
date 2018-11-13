@@ -1,4 +1,4 @@
 <?php 
-$connect = new PDO('mysql:host=localhost;dbname=carPull', 'root', '123456');
+$connect = new PDO('mysql:host=localhost;dbname=carpool', 'root', '123456');
 
 ?>
