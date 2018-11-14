@@ -3,7 +3,7 @@ session_start();
 error_reporting(0);
 date_default_timezone_set('Asia/Dhaka');// change according timezone
 $currentTime = date( 'Y-m-d H:i:s', time () );
-print_r($currentTime);
+
 
 if(strlen($_SESSION['username'])==0)
   { 
@@ -60,7 +60,7 @@ else{
                             <!-- Articles Thumbnail End -->
 
                             <!-- Articles Content Start -->
-                            <div class="col-lg-4 ">
+                            <div class="col-lg-4">
                                 <div class="display-table">
                                     <div class="display-table-cell">
                                         <div class="article-body">
@@ -68,17 +68,12 @@ else{
                                             <div class="article-date">
 
                                     <?php
-                             //$st2=DATE('Y-m-d');
+                             
                              $car_id=$row['car_id'];
 
                              $query3=mysqli_query($con,"SELECT * FROM `car_booking` WHERE `car_id`='$car_id' AND '$currentTime' BETWEEN `start_date` AND `end_date`");
 
-                             //$query3=mysqli_query($con,"SELECT * FROM `car_booking` WHERE `car_id`=$car_id AND '' BETWEEN date(`start_date`) AND date(`end_date`)");
-
-                             //SELECT * FROM `car_booking` WHERE `car_id`='$car_id' AND '$currTime' BETWEEN `start_date` AND `end_date`
-
-
-                             //$row3=$query3->fetch_assoc();
+                             
                              $row3=mysqli_num_rows($query3);
 
                             if ($row3>0) {
@@ -96,7 +91,7 @@ else{
                                             <table class="table ">
 
                                                 <tr>
-                                                    <th>Name :</span></th>
+                                                    <th>Name :</th>
                                                     <td> <?php echo $row['car_name']; ?></td>
                                                 </tr>
                                                 

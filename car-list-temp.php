@@ -72,11 +72,6 @@ if ($car_status==1) {
                              $currTime = date('Y-m-d H:i:s');
                              $car_id=$row['car_id'];
 
-                             //$query3=mysqli_query($con,"SELECT `start_date` FROM `car_booking` WHERE `car_id` ='$car_id' AND DATE(`start_date`) = '$st2' ");
-
-                             
-                             //print_r($currTime);
-
                              $query3=mysqli_query($con,"SELECT * FROM `car_booking` WHERE `car_id`='$car_id' AND '$currTime' BETWEEN `start_date` AND `end_date`");
 
                              //$row3=$query3->fetch_assoc();
@@ -97,7 +92,7 @@ if ($car_status==1) {
                                             <table class="table ">
 
                                                 <tr>
-                                                    <th>Name :</span></th>
+                                                    <th>Name :</th>
                                                     <td> <?php echo $row['car_name']; ?></td>
                                                 </tr>
                                                 

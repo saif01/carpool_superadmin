@@ -6,6 +6,7 @@ if(strlen($_SESSION['SadminName'])==0)
 header('location:../admin/login');
 }
 else{ 
+
 include('../db/config.php');
 ?>
     <!DOCTYPE html>
@@ -27,6 +28,17 @@ include('../db/config.php');
         <link rel="stylesheet" href="css/style.css">
         <!-- endinject -->
         <link rel="shortcut icon" href="images/favicon.png" />
+
+        <script language="javascript" type="text/javascript">
+            var popUpWin = 0;
+
+            function popUpWindow(URLStr, left, top, width, height) {
+                if (popUpWin) {
+                    if (!popUpWin.closed) popUpWin.close();
+                }
+                popUpWin = open(URLStr, 'popUpWin', 'toolbar=no,location=no,directories=no,status=no,menubar=no,scrollbars=yes,resizable=no,copyhistory=yes,width=' + 600 + ',height=' + 580 + ',left=' + left + ', top=' + top + ',screenX=' + left + ',screenY=' + top + '');
+            }
+        </script>
     </head>
 
     <body>
@@ -65,18 +77,21 @@ include('../db/config.php');
                                                 </thead>
                                                 <tbody>
                                                     <?php 
-		$query=mysqli_query($con," SELECT * FROM `user`");
-		while($row=mysqli_fetch_array($query))
-		{
+        $query=mysqli_query($con," SELECT * FROM `user`");
+        while($row=mysqli_fetch_array($query))
+        {
 
 ?>
                                                     <tr>
 
-                                                        <td> <img src="../admin/p_img/userImg/<?php echo($row['user_img']);?>" class="img-responsive" alt="Image" height="50" width="50" /> </td>
-                                                        <td class="center">
-                                                            <?php echo htmlentities($row['user_name']) ; ?>
+                                                        <td>
+                                        <a href="javascript:void(0);" onClick="popUpWindow('userprofile.php?user_id=<?php echo htmlentities($row['user_id']);?>');" title="View User Info.">
+                                        <img src="p_img/userImg/<?php echo($row['user_img']);?>" class="img-responsive" alt="Image" /> </td></a>
+                                                        <td>
+                                            <a href="javascript:void(0);" onClick="popUpWindow('userprofile.php?user_id=<?php echo htmlentities($row['user_id']);?>');" title="View User Info.">
+                                                <?php echo htmlentities($row['user_name']) ; ?></a>
                                                         </td>
-                                                        <td class="center">
+                                                        <td>
                                                             <?php echo htmlentities($row['user_contract']); ?>
                                                         </td>
                                                         <td class="center">
@@ -95,11 +110,11 @@ include('../db/config.php');
                                             <?php } ?>
                                           
 
-					<a href="user-edit?user_id=<?php echo htmlentities($row['user_id']);?>" title="Edit"
+                    <a href="user-edit?user_id=<?php echo htmlentities($row['user_id']);?>" title="Edit"
                     >
                     <i class="mdi mdi-pencil-box-outline text-warning icon-lg"></i>  
                   </a>
-									
+                                    
                         <a href="user-delete.php?user_id=<?php echo $row['user_id']?>" onClick="return confirm('Are you sure you want to delete???')" title="Delete"> <i class="mdi mdi-close-box-outline text-danger icon-lg"></i></a>
 
                                                             

@@ -275,6 +275,7 @@ $query=mysqli_query($con,"INSERT INTO `tbl_car`(`car_name`, `car_namePlate`, `te
                                                         <label class="col-sm-3 col-form-label">First Image :</label>
                                                         <div class="col-sm-9">
                                                             <input name="imgA" type="file" class="form-control" />
+                                                            <p style="color:red;">Resolution 1280*800 pixels</p>
                                                         </div>
                                                     </div>
                                                 </div>
@@ -283,14 +284,17 @@ $query=mysqli_query($con,"INSERT INTO `tbl_car`(`car_name`, `car_namePlate`, `te
                                                         <label class="col-sm-3 col-form-label">Second Image :</label>
                                                         <div class="col-sm-9">
                                                             <input name="imgB" type="file" class="form-control" />
+                                                            <p style="color:red;">Resolution 1280*800 pixels</p>
                                                         </div>
                                                     </div>
                                                 </div>
                                                 <div class="col-md-4">
                                                     <div class="form-group row">
                                                         <label class="col-sm-3 col-form-label">Third Image :</label>
+
                                                         <div class="col-sm-9">
                                                             <input name="imgC" type="file" class="form-control" />
+                                                            <p style="color:red;">Resolution 1280*800 pixels</p>
                                                         </div>
                                                     </div>
                                                 </div>

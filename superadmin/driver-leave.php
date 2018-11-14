@@ -104,11 +104,11 @@ if (isset($_POST['leave_cancel'])) {
                         <div class="col-lg-4 mx-auto">
                             <div class="auto-form-wrapper">
 
-                                <img class="user-s" src="../admin/p_img/driverimg/<?php echo($row['driver_img']);?>" class="img-responsive" alt="Image" />
+                                <img class="user-s" src="p_img/driverimg/<?php echo($row['driver_img']);?>" class="img-responsive" alt="Image" />
                                 <table>
 
 
-                                   
+
 
 
                                     <tr>
@@ -116,81 +116,84 @@ if (isset($_POST['leave_cancel'])) {
                                         <th> <strong><?php echo $row['driver_name'];?></strong> </th>
                                     </tr>
 
-                                   
 
 
-                                    
+
+
                                     <tr>
                                         <td>Last Leave Status:</td>
-                                        <th> 
-        <?php
+                                        <th>
+                                            <?php
           if ($row['leave_start']=='') {
             echo "No Data Avaiable";
           }
           else{
-            echo date("M j, Y", strtotime($row['leave_start'])); ?> - To - <?php echo date("M j, Y", strtotime($row['leave_end'])); }?>
+            echo date("M j, Y", strtotime($row['leave_start'])); ?> - To -
+                                                <?php echo date("M j, Y", strtotime($row['leave_end'])); }?>
 
 
-           </th>
+                                        </th>
 
-           <th>
-               
-<form method="post">
-         <button type="submit" name="leave_cancel" class="btn btn-outline-danger" >Cancel</button>
-</form>
-               
-           </th>
+                                        <th>
+                                            <?php 
 
-           
+            if ($row['leave_start']=='') {
+                
+            }
+            else{
+            ?>
+
+                                            <form method="post">
+                                                <button type="submit" name="leave_cancel" class="btn btn-outline-danger">Cancel</button>
+                                            </form>
+                                            <?php } ?>
+                                        </th>
+
+
                                     </tr>
 
 
                                 </table>
 
-<div class="col-12 grid-margin">
-                                <div class="card">
-                                    <div class="card-body">
-                                        <!-- <h4 class="card-title">Car Add Form</h4> -->
-                                        <button class="card-title btn btn-outline btn-block ">Driver Leave Form</button>
+                                <div class="col-12 grid-margin">
+                                    <div class="card">
+                                        <div class="card-body">
+                                            <!-- <h4 class="card-title">Car Add Form</h4> -->
+                                            <button class="card-title btn btn-outline btn-block ">Driver Leave Form</button>
 
-                                <form action="" method="POST">
+                                            <form action="" method="POST">
 
-                                      <div class="row">
-                                                <div class="col-md-6">
-                                                    <div class="form-group row">
-                                                        <label class="col-sm-3 col-form-label">Leave Start :</label>
-                                                        <div class="col-sm-9">
-                                                           <input type="date" name="leave_satart" class="form-control" required>
+                                                <div class="row">
+                                                    <div class="col-md-6">
+                                                        <div class="form-group row">
+                                                            <label class="col-sm-3 col-form-label">Leave Start :</label>
+                                                            <div class="col-sm-9">
+                                                                <input type="date" name="leave_satart" class="form-control" required>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-md-6">
+                                                        <div class="form-group row">
+                                                            <label class="col-sm-3 col-form-label">Car Capacity :</label>
+                                                            <div class="col-sm-9">
+                                                                <input type="date" name="leave_end" class="form-control" required />
+                                                            </div>
                                                         </div>
                                                     </div>
                                                 </div>
-                                                <div class="col-md-6">
-                                                    <div class="form-group row">
-                                                        <label class="col-sm-3 col-form-label">Car Capacity :</label>
-                                                        <div class="col-sm-9">
-                                                            <input type="date" name="leave_end" class="form-control" required />
-                                                        </div>
+                                                <div class="row">
+                                                    <div class="col-12 text-center">
+                                                        <button type="submit" name="submit" class="btn btn-outline-success btn-block btn-rounded">Driver leave Entry</button>
+                                                        <button class="btn btn-light btn-block btn-rounded">Reset</button>
                                                     </div>
                                                 </div>
-                                            </div>
-                                    <div class="row">
-                                                <div class="col-12 text-center">
-                                                    <button type="submit" name="submit" class="btn btn-outline-success btn-block btn-rounded">Driver leave Entry</button>
-                                                    <button class="btn btn-light btn-block btn-rounded">Reset</button>
-                                                </div>
-                                            </div>
 
 
-                                </form>
+                                            </form>
 
-</div>
-</div>
-</div>
-
-
-
-
-
+                                        </div>
+                                    </div>
+                                </div>
 
 
                             </div>

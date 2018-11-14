@@ -168,6 +168,7 @@ echo "<option value='". $row2['car_id'] ."'>" .$row2['car_name'] ." -- ". $row2[
                                                         <div class="col-sm-9">
 
                                                             <input name="driver_img" type="file" class="form-control" required />
+                                                            <p style="color:red;">Resolution 300*300 pixels</p>
 
                                                         </div>
                                                     </div>

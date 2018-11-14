@@ -172,8 +172,13 @@ $booking=mysqli_num_rows($sql4);
                                 <div class="card">
                                     <div class="card-body">
                                         <h4 class="card-title">Car chart</h4>
-                                        <div id="Calendar_S" style="height:300px;"></div>
-                                        <!-- <canvas id="Calendar_S" style="height:250px"></canvas> -->
+                                        <div id="carChart" style="height:300px;"></div>
+
+                                        <div id="chart_wrap">
+                                        <div id="chart_div"></div>
+                                            </div>
+
+
                                     </div>
                                 </div>
                             </div>
@@ -212,24 +217,21 @@ $booking=mysqli_num_rows($sql4);
             google.charts.load('current', {
                 'packages': ['corechart']
             });
-            google.charts.setOnLoadCallback(Calendar_S);
+            google.charts.setOnLoadCallback(carChart);
 
-            function Calendar_S() {
+            function carChart() {
                 var data = google.visualization.arrayToDataTable([
-                    ['car_name', 'Number'],
-                    <?php  
-                          while($row2 = mysqli_fetch_array($result2))  
-                          {  
-                               echo "['".$row2["car_name"].".".$row2["car_number"]."', ".$row2["number"]."],";  
-                          }  
-                          ?>
+                    
+                    ['Gender', 'Overall'],
+                    ['M', 110],
+                    ['F', 20]
                 ]);
                 var options = {
                     title: 'Percentage of Car Pulled',
                     //is3D:true,  
                     pieHole: 0.4
                 };
-                var chart = new google.visualization.PieChart(document.getElementById('Calendar_S'));
+                var chart = new google.visualization.PieChart(document.getElementById('carChart'));
                 chart.draw(data, options);
             }
         </script>
@@ -242,16 +244,13 @@ $booking=mysqli_num_rows($sql4);
 
             function Calendar_u() {
                 var data = google.visualization.arrayToDataTable([
-                    ['user_name', 'Number'],
-                    <?php  
-                          while($row3 = mysqli_fetch_array($result3))  
-                          {  
-                               echo "['".$row3["user_name"]."', ".$row3["number"]."],";  
-                          }  
-                          ?>
+                    ['Gender', 'Overall'],
+                    ['M', 210],
+                    ['F', 70]
                 ]);
                 var options = {
-                    title: 'User Booking Pai Chart',
+
+                    title: 'User Booking Pai Chart', 'width':'auto', 'height':'auto',
                     is3D: true,
                     //pieHole: 0.5  
                 };

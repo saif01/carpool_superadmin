@@ -99,9 +99,9 @@ $query=mysqli_query($con," INSERT INTO `user`(`user_name`, `user_pass`, `user_co
                                                 <div class="col-md-6">
                                                     <div class="form-group row">
 
-                                                        <label class="col-sm-3 col-form-label">User Name  </label>
+                                                        <label class="col-sm-3 col-form-label">User Name/ ID  </label>
                                                         <div class="col-sm-9">
-
+                                                            
                                                             <input type="text" id="check_value" onBlur="userAvailability()" name="user_name" class="form-control" placeholder="Enter User Name" required>
                                                 <span id="user-availability-status1" style="font-size:12px;"></span>
 
@@ -146,6 +146,7 @@ $query=mysqli_query($con," INSERT INTO `user`(`user_name`, `user_pass`, `user_co
 
                                                    
                                                            <input name="user_img" type="file" class="form-control file-upload-info" placeholder="Upload Image" required>
+                                                           <p style="color:red;">Resolution 300*300 pixels</p>
                                                         </div>
                                                 </div>
                                             </div> 

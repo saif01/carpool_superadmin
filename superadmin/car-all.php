@@ -5,7 +5,7 @@ if(strlen($_SESSION['SadminName'])==0)
   { 
 header('location:../admin/login');
 }
-else{  
+else{ 
 include('../db/config.php');
 ?>
     <!DOCTYPE html>
@@ -88,9 +88,15 @@ include('../db/config.php');
 ?>
                                                     <tr>
 
-                                                        <td><img src="../admin/p_img/carImg/<?php echo($row['car_img1']);?>" class="img-responsive" alt="Car Img" height="42" width="70" /></td>
+                                                        <td>
+                                        <a href="javascript:void(0);" onClick="popUpWindow('car-profile.php?car_id=<?php echo htmlentities($row['car_id']);?>');" title="View Car Info.">
+                                        <img src="p_img/carImg/<?php echo($row['car_img1']);?>" class="img-responsive" alt="Car Img" /></a>
+                                                        </td>
+
                                                         <td class="center">
-                                                            <?php echo htmlentities($row['car_name']) ; ?>
+
+                                            <a href="javascript:void(0);" onClick="popUpWindow('car-profile.php?car_id=<?php echo htmlentities($row['car_id']);?>');" title="View Car Info.">
+                                                            <?php echo htmlentities($row['car_name']) ; ?> </a>
                                                         </td>
                                                         <td class="center">
                                                             <?php echo htmlentities($row['car_namePlate']); ?>
@@ -109,7 +115,7 @@ include('../db/config.php');
                                             
                                         <?php } else {?>
 
-                                            <a href="car-status-temp.php?s_car_id=<?php echo htmlentities($row['car_id']);?>" onclick="return confirm('Are you sure you want to Make this ** Temporary Car **?');" title="Temporary"> <button class="btn btn-success">Nornal</button> </a> 
+                                            <a href="car-status-temp.php?s_car_id=<?php echo htmlentities($row['car_id']);?>" onclick="return confirm('Are you sure you want to Make this ** Temporary Car **?');" title="Temporary"> <button class="btn btn-success">Regular</button> </a> 
                                             <?php } ?>
 
                                                         </td>
@@ -142,7 +148,7 @@ include('../db/config.php');
                   </a>
 
                 <a href="car-delete.php?car_id=<?php echo $row['car_id']?>" onClick="return confirm('Are you sure you want to delete?')" title="Delete"> <i class="mdi mdi-close-box-outline text-danger icon-lg"></i></a>
-                                                                </a>
+                                                                
                                                         </td>
                                                     </tr>
                                                     <?php } ?>
